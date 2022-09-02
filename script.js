@@ -25,3 +25,5 @@ h1.classList.remove("verde");
 //h1.classList.contains("verde");
 
 input.value = "123";
+
+Prueba;

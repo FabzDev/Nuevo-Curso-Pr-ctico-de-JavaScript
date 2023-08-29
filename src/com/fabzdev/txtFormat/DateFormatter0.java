@@ -6,12 +6,21 @@ import java.util.Date;
 public class DateFormatter0{
 
 	public static Date parseDate(String date){
-		int cp1 = date.indexOf("/");		
+		
+		if(date == null || date.length() == 0)
+			return null;
+
+		int cp1 = date.indexOf("/");
+		if (cp1 == -1)
+			return null;	
 
 		String temp = date.substring(0,cp1);
 		int day = Integer.parseInt(temp);
 
 		int cp2 = date.indexOf("/", (cp1+1));
+		if (cp2 == -1)
+			return null;	
+
 
 		temp = date.substring((cp1+1),cp2);
 		int month = Integer.parseInt(temp);

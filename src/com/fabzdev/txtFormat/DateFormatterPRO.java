@@ -15,8 +15,6 @@ public class DateFormatterPRO {
 	static int month;
 	static int year;
 
-	// "0123456789"
-	// parseDate("13/02/2023", "mm/dd/yyyy")
 	public static Date parseDate(String date, String format) {
 		for (int i = 0; i < format.length() - 1; i++) {
 

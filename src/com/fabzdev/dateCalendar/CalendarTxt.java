@@ -10,12 +10,14 @@ public class CalendarTxt{
 	//Método para llenar arreglos que contienen la información del calendario.
 	public void llenarCalendario(){
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.MONTH, 0);
+		cal.set(Calendar.DAY_OF_MONTH, 25);
+		cal.set(Calendar.MONTH, 3);
 		
 		int aDay = cal.get(Calendar.DAY_OF_MONTH);
 		int aMonth = cal.get(Calendar.MONTH)+1;
 		int aYear = cal.get(Calendar.YEAR);
-		int nDays = diasMes(aMonth+1);
+		
+		int nDays = diasMes(aMonth);
 		int nCDays = 0;	
 
 		String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", 				"Noviembre", "Diciembre"};
@@ -23,8 +25,8 @@ public class CalendarTxt{
 		String fBasica = "+------+------+------+------+------+------+------+"; 
 		String sFMes = meses[aMonth-1] + " " + aYear;
 		String fMes = "";
-		String fDias = "| Dom | Lun | Mar | Mie | Jue | Vie | Sab |";	
-		int acum=0;							
+		String fDias = "| Dom  | Lun  | Mar  | Mie  | Jue  | Vie  | Sab  |";	
+		int acum=0;						
 		int acum2=0;							
 	
 		Calendar calDay1 = Calendar.getInstance();
@@ -43,7 +45,8 @@ public class CalendarTxt{
 		}
 	
 		//Definiendo el tamaño del calendario
-		if (calDay1.get(Calendar.DAY_OF_WEEK) == 6 && diasMes(aMonth+1) == 31 || calDay1.get(Calendar.DAY_OF_WEEK) == 7 && diasMes(aMonth+1)==30)
+		int primerDia = calDay1.get(Calendar.DAY_OF_WEEK);
+		if (primerDia == 6 && nDays == 31 || primerDia == 7 && nDays==30)
 			nCDays=42;
 		else 
 			nCDays=35;
@@ -51,19 +54,12 @@ public class CalendarTxt{
 		
 		String[] cdays = new String[nCDays];
 
-		/*
-		 for (int i : days){
-   		     days[acum] = acum+1;
-	   	     acum++;
-		}
-		*/
-
 		
-		int primerDia = calDay1.get(Calendar.DAY_OF_WEEK);
+		
 
 		for (int j = 0; j < nCDays; j++){
 		
-			if(j > nDays+1 || j < primerDia -1)
+			if(j > nDays+primerDia-2 || j < primerDia -1)
 				cdays[j] = "  ";
 			else if ((j - primerDia + 1) < 9)
 				cdays[j] = "0" + (j - primerDia +2);
@@ -73,7 +69,7 @@ public class CalendarTxt{
 
 		
 		//Creando string del calendario
-		calendar = fBasica + "\n" + fMes + "\n" + fBasica+ "\n";
+		calendar = fBasica + "\n" + fMes + "\n" + fBasica+ "\n" + fDias + "\n"+ fBasica+ "\n";
 		for(int i=0; i<nCDays; i++){
 			if(i!=0 && i%7 == 0)
 				calendar = calendar +"|\n";

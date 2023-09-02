@@ -10,8 +10,11 @@ public class CalendarTxt{
 	//Método para llenar arreglos que contienen la información del calendario.
 	public void llenarCalendario(){
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.DAY_OF_MONTH, 25);
-		cal.set(Calendar.MONTH, 3);
+		
+		//INSERTA LA FECHA DESEADA
+		//cal.set(Calendar.DAY_OF_MONTH, 12);
+		//cal.set(Calendar.MONTH, 10);
+		//cal.set(Calendar.YEAR, 2019);
 		
 		int aDay = cal.get(Calendar.DAY_OF_MONTH);
 		int aMonth = cal.get(Calendar.MONTH)+1;
@@ -36,7 +39,7 @@ public class CalendarTxt{
 		for(int i=0; i < fBasica.length(); i++){
 			if(i==0 || i==(fBasica.length()-1)){
 				fMes= fMes + "|";
-			}else if (i == (fBasica.length()/2 - sFMes.length()/2)){
+			} else if (i == (fBasica.length()/2 - sFMes.length()/2)){
 				fMes= fMes + sFMes;
 				i = i + (sFMes.length()-1);
 			} else {  
@@ -59,7 +62,7 @@ public class CalendarTxt{
 
 		for (int j = 0; j < nCDays; j++){
 		
-			if(j > nDays+primerDia-2 || j < primerDia -1)
+			if(j > (nDays - 1) + (primerDia - 1) || j < primerDia -1)
 				cdays[j] = "  ";
 			else if ((j - primerDia + 1) < 9)
 				cdays[j] = "0" + (j - primerDia +2);
@@ -73,7 +76,10 @@ public class CalendarTxt{
 		for(int i=0; i<nCDays; i++){
 			if(i!=0 && i%7 == 0)
 				calendar = calendar +"|\n";
-			calendar = calendar + "|  " + cdays[i] + "  ";
+			if(i == aDay -1 + primerDia -1)
+				calendar = calendar + "| [" + cdays[i] + "] ";
+			else
+				calendar = calendar + "|  " + cdays[i] + "  ";
 			}
 		calendar = calendar + "|" + "\n" + fBasica;
 

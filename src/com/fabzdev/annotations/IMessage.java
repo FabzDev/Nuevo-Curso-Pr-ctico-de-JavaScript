@@ -1,11 +1,11 @@
 package com.fabzdev.annotations;
 
-import java.lang.annotations.Retention;
-import java.lang.annotations.RetentionPolicy;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Interface IMessage {
-	
+@interface IMessage{
+
 	String message();
-	
+
 }

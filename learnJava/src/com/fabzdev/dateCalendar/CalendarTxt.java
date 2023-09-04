@@ -81,7 +81,7 @@ public class CalendarTxt{
 			else
 				calendar = calendar + "|  " + cdays[i] + "  ";
 			}
-		calendar = calendar + "|" + "\n" + fBasica;
+		calendar = calendar + "|" + "\n" + fBasica + "\n";
 
 		System.out.print(calendar);
 	

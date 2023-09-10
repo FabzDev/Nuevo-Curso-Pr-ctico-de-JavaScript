@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 
 public class TextReader {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("C:/TheJavaPathV2/learnJava/src/com/fabzdev/quijote.txt")));
+        BufferedReader br = new BufferedReader(new InputStreamReader(TextReader.class.getResourceAsStream("quijote.txt")));
         String line = br.readLine();
         while(line != null){
             System.out.println(line);

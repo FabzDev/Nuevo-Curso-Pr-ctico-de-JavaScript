@@ -7,20 +7,20 @@ import java.io.InputStreamReader;
 public class ArbolValidatonMethod {
 
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int size = getSize();
+        int size = getSize(br, "Digita el tamaño del arbol", "El numero ingresado no es valido, por favor intentalo de nuevo");
         hojas(size);
     }
 
-    public static int getSize() {
+    public static int getSize(BufferedReader br, String message1, String message2 ) throws IOException {
         while (true) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Digita el tamaño del arbol");
-            try {
+            System.out.println(message1);
                 String sizeString = br.readLine();
+            try {
                 return Integer.parseInt(sizeString);
             } catch (Exception e) {
-                System.out.println("El numero ingresado no es valido, por favor intentalo de nuevo");
+                System.out.println(message2);
                 System.out.println();
             }
 

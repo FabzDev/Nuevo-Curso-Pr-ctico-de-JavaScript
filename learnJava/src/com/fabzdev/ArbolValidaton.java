@@ -4,15 +4,25 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Arbol {
+public class ArbolValidaton {
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Digita el tamaño del arbol");
-        String sizeString = br.readLine();
-        
-        int size = Integer.parseInt(sizeString);
-        hojas(size);
+        boolean active = true;
+        do {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Digita el tamaño del arbol");
+            String sizeString = br.readLine();
+
+            try {
+                int size = Integer.parseInt(sizeString);
+                hojas(size);
+                active = false;
+            } catch (Exception e) {
+                System.out.println("El numero ingresado no es valido, por favor intentalo de nuevo");
+                System.out.println();
+            }
+
+        } while (active);
     }
 
     public static void hojas(int n) {

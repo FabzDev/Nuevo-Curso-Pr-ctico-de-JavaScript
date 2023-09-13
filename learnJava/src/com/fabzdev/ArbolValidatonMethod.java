@@ -23,7 +23,7 @@ public class ArbolValidatonMethod {
                 System.out.println(message2);
                 System.out.println();
             }
-
+            br.close();
         }
     }
 

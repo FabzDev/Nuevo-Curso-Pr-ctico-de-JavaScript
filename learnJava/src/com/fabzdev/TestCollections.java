@@ -1,4 +1,3 @@
-
 package com.fabzdev;
 
 import java.io.FileInputStream;
@@ -19,8 +18,9 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class TestCollections {
-    
+
     static class Person {
+
         int primaryKey;
         String name;
         int age;
@@ -36,9 +36,9 @@ public class TestCollections {
             }
             return false;
         }
-        
+
     }
-    
+
     private static void testSet() {
         Set s = new HashSet();
         s.add("uno");
@@ -46,43 +46,88 @@ public class TestCollections {
         s.add("tres");
         s.add("dos");
         s.add("uno");
-        
+
         System.out.println("s.size() = " + s.size());
     }
-    
+
     private static void equalsTest() {
         Object i1 = new Integer(1);
         Object i2 = new Integer(1);
-        
+
         System.out.println(i1.equals(i2));
-        
+
         String s1 = new String("Hola");
         String s2 = new String("Mundo");
-        
+
         System.out.println(s1.equals(s2));
     }
-    
+
     private static void personTest() {
         Person p1 = new Person();
         p1.primaryKey = 100;
         p1.name = "Raul";
         p1.age = 21;
-        
+
         Person p2 = new Person();
         p2.primaryKey = 0;
         p2.name = "Raul";
         p2.age = 21;
     }
-    
+
     private static void iteratorTest() {
-        
+        Set set = new HashSet();
+        set.add("uno");
+        set.add("dos");
+        set.add("tres");
+        set.add("cuatro");
+        set.add("cinco");
+        set.add("seis");
+
+        for (Iterator it = set.iterator(); it.hasNext();) {
+            String s = (String) it.next();
+            System.out.println(s);
+        }
+
     }
-    
-    
+
+    private static void linkedHashSetTest() {
+        Set set = new LinkedHashSet();
+        set.add("uno");
+        set.add("dos");
+        set.add("tres");
+        set.add("cuatro");
+        set.add("cinco");
+        set.add("seis");
+
+        for (Iterator it = set.iterator(); it.hasNext();) {
+            String s = (String) it.next();
+            System.out.println(s);
+        }
+
+    }
+
+    private static void treeSetTest() {
+        Set set = new TreeSet();
+        set.add("uno");
+        set.add("dos");
+        set.add("tres");
+        set.add("cuatro");
+        set.add("cinco");
+        set.add("seis");
+
+        for (Iterator it = set.iterator(); it.hasNext();) {
+            String s = (String) it.next();
+            System.out.println(s);
+        }
+
+    }
+
     public static void main(String[] args) {
-        // testSet();
-        // equalsTest();
-        // iteratorTest();
-        
+//        testSet();
+//        equalsTest();
+//        iteratorTest();
+//        linkedHashSetTest();
+        treeSetTest();
+
     }
 }

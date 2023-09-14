@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 public class StringFormatter1 {
 
-    static int lineWidth = 35;
+    static int lineWidth = 50;
 
     static String str = "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no hace mucho tiempo "
             + "que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y "
@@ -52,12 +52,11 @@ public class StringFormatter1 {
     }
 
     public static void main(String[] args) {
-        int cantCols=3;
-        int conteoFilas = 1;
-        
+        double cantCols = 2;
+        double conteoFilas = 0;
+
         StringTokenizer st = new StringTokenizer(str);
 
-        int columns = 3;
         int charCount = 0;
         StringBuilder line = new StringBuilder();
         List lines = new ArrayList();
@@ -72,10 +71,12 @@ public class StringFormatter1 {
                 line.append(word);
                 if (!st.hasMoreTokens()) {
                     lines.add(line.toString());
+                    conteoFilas++;
                 }
             } else {
-                for(int i = line.length(); i<=lineWidth;i++)
+                for (int i = line.length(); i <= lineWidth; i++) {
                     line.append(" ");
+                }
                 lines.add(line.toString());
                 line.setLength(0);
                 line.append(word);
@@ -84,20 +85,18 @@ public class StringFormatter1 {
             }
 
         }
+    
+        int n = (int) Math.ceil(conteoFilas / cantCols);
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < cantCols; j++) {
+                if(i + (j*n) < lines.size()){
+                System.out.print(lines.get(i + (j*n)));
+                System.out.print("    ");
+                }
+            }
+            System.out.println();
+        }
 
-
-//        for (Iterator it = lines.iterator(); it.hasNext();) {
-//            System.out.println(it.next());
-//        }
-//         System.out.println(conteoFilas);
-//         
-         
-         int n = (int) Math.ceil(conteoFilas/cantCols);
-         
-         for(int i = 0; i < n; i++){
-             System.out.println(lines.get(i) + "    " + lines.get(i+n) + "    " + lines.get(i+n+n));
-         }
-         
-         
     }
 }

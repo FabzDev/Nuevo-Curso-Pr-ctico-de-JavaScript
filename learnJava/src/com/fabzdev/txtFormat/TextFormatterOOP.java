@@ -10,7 +10,8 @@ public class TextFormatterOOP {
     int columns;
 
     double conteoFilas = 0;
-    List lines = new ArrayList();
+    List<String> lines = new ArrayList<>();
+    List<String> linesFormatted = new ArrayList<>();
 
     public TextFormatterOOP(String str, int lineWidth, int columns, boolean format) {
 
@@ -28,21 +29,24 @@ public class TextFormatterOOP {
         StringTokenizer st = new StringTokenizer(str);
         int charCount = 0;
         StringBuilder line = new StringBuilder();
+        boolean space = false;
 
         while (st.hasMoreTokens()) {
-            String word = st.nextToken() + " ";
+            String word = st.nextToken();
             charCount += word.length();
 
             if (charCount < lineWidth) {
+                if (space) {
+                    line.append(" ");
+                    charCount++;
+                }
                 line.append(word);
+                space = true;
                 if (!st.hasMoreTokens()) {
                     lines.add(line.toString());
                     conteoFilas++;
                 }
             } else {
-//                for (int i = line.length(); i <= lineWidth; i++) {
-//                    line.append(" ");
-//                }
                 lines.add(line.toString());
                 line.setLength(0);
                 line.append(word);
@@ -53,44 +57,48 @@ public class TextFormatterOOP {
 
         if (format) {
             justifyText();
+            printText(linesFormatted);
+        } else {
+            printText(lines);
         }
     }
 
     public void justifyText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(lines.get(0));
+        for (String s : lines) {
+            StringBuilder sb = new StringBuilder();
 
-        // para una fila
-        int separadores = 0;
-        int posSeparadores = 0;
+            sb.append(s);
 
-        for (int i = 0; i < sb.length(); i++) {
-            if (sb.charAt(i) == ' ') {
-                separadores++;
-            }
-        }
+            // para una fila
+            int separadores = 0;
+            int posSeparadores = 0;
 
-        int espaciosTotales = lineWidth - sb.length() + separadores;
-        int mod = espaciosTotales % separadores;
-        int espacio1 = espaciosTotales / separadores;
-        int espacio2 = mod + (separadores - 1) / separadores;
-        int pos = 0;
-
-        for (int i = 0; i < separadores - 1; i++) {
-            pos = sb.indexOf(" ", pos);
-
-            int espacioF = mod > espacio2 ? espacio2 : mod;
-            mod -= espacioF;
-            int espaciosI = espacio1 + espacioF - 1;
-
-            for (int j = 0; j < espaciosI; j++) {
-                sb.insert(pos, " ");
+            for (int i = 0; i < sb.length(); i++) {
+                if (sb.charAt(i) == ' ') {
+                    separadores++;
+                }
             }
 
-            pos += espaciosI + 1;
-        }
+            int espaciosTotales = lineWidth - sb.length() + separadores;
+            int mod = espaciosTotales % separadores;
+            int espacio1 = espaciosTotales / separadores;
+            int espacio2 = mod + (separadores - 1) / separadores;
+            int pos = 0;
 
-        System.out.println(sb.toString());
+            for (int i = 0; i < separadores; i++) {
+                pos = sb.indexOf(" ", pos);
+
+                int espacioF = mod > espacio2 ? espacio2 : mod;
+                mod -= espacioF;
+                int espaciosI = espacio1 + espacioF - 1;
+
+                for (int j = 0; j < espaciosI; j++) {
+                    sb.insert(pos, " ");
+                }
+                pos += espaciosI + 1;
+            }
+            linesFormatted.add(sb.toString());
+        }
 
     }
 
@@ -118,7 +126,7 @@ public class TextFormatterOOP {
         System.out.println();
     }
 
-    public void printText() {
+    public void printText(List lines) {
         int renglones = (int) Math.ceil(conteoFilas / columns);
         for (int i = 0; i < renglones; i++) {
             for (int j = 0; j < columns; j++) {
@@ -132,7 +140,7 @@ public class TextFormatterOOP {
                     System.out.print("    ");
                 }
             }
-        System.out.println();
+            System.out.println();
         }
     }
 
@@ -159,6 +167,5 @@ public class TextFormatterOOP {
         boolean format = true;
 
         TextFormatterOOP formatter = new TextFormatterOOP(str, lineWidth, columns, format);
-//        formatter.printText();
     }
 }

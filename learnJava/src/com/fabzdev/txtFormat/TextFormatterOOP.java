@@ -162,8 +162,8 @@ public class TextFormatterOOP {
                 + "poco a nuestro cuento; basta que en la narración dél no se salga un punto de la "
                 + "verdad.";
 
-        int columns = 5;
-        int lineWidth = 40;
+        int columns = 2;
+        int lineWidth = 100;
         boolean format = true;
 
         TextFormatterOOP formatter = new TextFormatterOOP(str, lineWidth, columns, format);

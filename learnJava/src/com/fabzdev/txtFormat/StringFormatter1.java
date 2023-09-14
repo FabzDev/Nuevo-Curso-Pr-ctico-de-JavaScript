@@ -52,7 +52,9 @@ public class StringFormatter1 {
     }
 
     public static void main(String[] args) {
-
+        int cantCols=3;
+        int conteoFilas = 1;
+        
         StringTokenizer st = new StringTokenizer(str);
 
         int columns = 3;
@@ -72,18 +74,30 @@ public class StringFormatter1 {
                     lines.add(line.toString());
                 }
             } else {
+                for(int i = line.length(); i<=lineWidth;i++)
+                    line.append(" ");
                 lines.add(line.toString());
                 line.setLength(0);
                 line.append(word);
                 charCount = word.length();
+                conteoFilas++;
             }
 
         }
 
 
-        for (Iterator it = lines.iterator(); it.hasNext();) {
-            System.out.println(it.next());
-        }
-
+//        for (Iterator it = lines.iterator(); it.hasNext();) {
+//            System.out.println(it.next());
+//        }
+//         System.out.println(conteoFilas);
+//         
+         
+         int n = (int) Math.ceil(conteoFilas/cantCols);
+         
+         for(int i = 0; i < n; i++){
+             System.out.println(lines.get(i) + "    " + lines.get(i+n) + "    " + lines.get(i+n+n));
+         }
+         
+         
     }
 }

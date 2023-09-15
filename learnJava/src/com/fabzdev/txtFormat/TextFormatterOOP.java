@@ -71,7 +71,6 @@ public class TextFormatterOOP {
 
             // para una fila
             int separadores = 0;
-            int posSeparadores = 0;
 
             for (int i = 0; i < sb.length(); i++) {
                 if (sb.charAt(i) == ' ') {
@@ -162,8 +161,8 @@ public class TextFormatterOOP {
                 + "poco a nuestro cuento; basta que en la narración dél no se salga un punto de la "
                 + "verdad.";
 
-        int columns = 2;
-        int lineWidth = 100;
+        int columns = 5;
+        int lineWidth = 22;
         boolean format = true;
 
         TextFormatterOOP formatter = new TextFormatterOOP(str, lineWidth, columns, format);

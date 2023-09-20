@@ -1,21 +1,19 @@
 
 package com.fabzdev.generics;
 
-public class MutableObjectTest {
-        private static boolean someMethod(MutableObject myRefArg) {
-        myRefArg.set("Hola mundo");
-        return true;
-        }
-    
+public class MutableObjectTest{
     public static void main(String[] args) {
-        String myResult = null;
+        String value = null;
         
-        MutableObject myRefArg = new MutableObject();
-        if(someMethod(myRefArg)){
-            myResult = (String) myRefArg.get();
+        MutableObject<String> mo = new MutableObject<>();
+        if(someMethod(mo)){
+            value = mo.getValue();
         }
-        System.out.println(myResult);
+        System.out.println(value);
     }
-
-
+    
+    public static boolean someMethod(MutableObject<String> mutable){
+        mutable.setValue("Hola mundo");
+        return true;
+    }
 }

@@ -1,14 +1,14 @@
 
 package com.fabzdev.generics;
 
-public class MutableObject {
-    private Object value;
+public class MutableObject<T>{
+    private T value;
     
-    public void set (Object value){
+    public void setValue(T value){
         this.value = value;
     }
     
-    public Object get (){
+    public T getValue(){
         return value;
     }
 }

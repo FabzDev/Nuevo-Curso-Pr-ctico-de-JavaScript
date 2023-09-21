@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author fabio
  */
-public class sortDemo {
+public class SortDemo {
 
     public static void sortDemo1() {
         String[] arr = {"x", "m", "c", "w", "a", "f", "d"};

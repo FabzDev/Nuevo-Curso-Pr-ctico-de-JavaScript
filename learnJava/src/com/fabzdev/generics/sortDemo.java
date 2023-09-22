@@ -78,7 +78,7 @@ public class SortDemo {
     }
 
     public static void main(String[] args) {
-        sortDemo1();
+//        sortDemo1();
         sortDemo2();
     }
 }

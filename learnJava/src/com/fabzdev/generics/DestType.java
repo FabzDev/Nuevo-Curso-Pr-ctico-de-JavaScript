@@ -6,7 +6,7 @@ import java.util.List;
 /**
  *
  * @author fabio
- */
+ */ 
 public class DestType {
 
     public static <T> List<T> loadData() {

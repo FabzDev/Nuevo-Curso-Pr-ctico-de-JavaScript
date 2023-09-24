@@ -1,5 +1,6 @@
 package com.fabzdev.generics;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,6 +61,7 @@ public class WildcardsDemo {
 //        m2.setValue(m1.getValue()); //Error
 //        Number n = m1.getValue();
 //        m2.setValue(n); //Error
+//        List<Integer> l[] = new List<>[10];
         return m2;
     }
 

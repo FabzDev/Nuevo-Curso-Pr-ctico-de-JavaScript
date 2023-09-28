@@ -30,6 +30,7 @@ public class LinkedListDemo {
         
         n=head;
         while(n != null){
+            System.out.println(n.getName());
             n=n.getNext(); 
         }
     }

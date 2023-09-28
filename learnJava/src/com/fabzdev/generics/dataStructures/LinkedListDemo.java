@@ -30,7 +30,7 @@ public class LinkedListDemo {
         
         n=head;
         while(n != null){
-            n=n.getNext();
+            n=n.getNext(); 
         }
     }
 }

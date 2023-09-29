@@ -17,85 +17,108 @@ import java.util.StringTokenizer;
 public class CacheTest {
 
     class Cache {
-
         CacheNode head;
+        int size = 0;
         int count = 0;
 
         public CacheNode getNode(String word) {
-            CacheNode prev = head;
-            CacheNode temp = head;
-            CacheNode nuevoNodo = new CacheNode(word);
-
-            if (temp == null) {
-                head = nuevoNodo;
-                count++;
-                return head;
+            if (head == null) {
+                return agregarNuevoNodo(word);
             } else {
-                boolean encontrado = false;
-                while (temp.next != null) {
-                    if (temp.word.equals(word)) {
-                        encontrado = true;
-                        break;
-                    } else {
-                        prev = temp;
-                        temp = temp.next;
-                    }
-                }
+                boolean encontrado = nodoEncontrado(word);
                 if (encontrado) {
-                    //agrega nodo
-                    if (count > 128) {
-                        temp = prev;
-                        temp.next = null;
-                        return nuevoNodo;
-                    }
+                    return reubicarNodoInicio(word);
                 } else {
-
+                    if (count > size + 1) {
+                        eliminarUltimoNodo();
+                    }
+                    return agregarNuevoNodo(word);
                 }
             }
-
-//            
-//            while(temp.next !=null && !temp.next.word.equals(word)){
-//                prev = temp;
-//                temp = temp.next;
-//            }
-//            if(temp.next == null){
-//                if(temp.next.word.equals(word)){//si es el ultimo elemento
-//                    //agregar nodo al inicio
-//                    //eliminar nodo orginal
         }
+    
+
+    public CacheNode agregarNuevoNodo(String word) {
+        CacheNode nodo = new CacheNode(word);
+        nodo.next = head.next;
+        head = nodo;
+        count++;
+        return nodo;
+
     }
 
-    class CacheNode {
-
-        public String word;
-        public CacheNode next;
-        public CacheNode prev;
-
-        public CacheNode(String word) {
-            this.word = word;
-        }
-    }
-
-    class SlowWord {
-
-        String word;
-
-        public SlowWord(String word) {
-            this.word = word;
-            try {
-                Thread.sleep(50);
-                System.out.println(word);
-            } catch (Exception e) {
-                System.out.println(e);
+    public CacheNode reubicarNodoInicio(String word) {
+        CacheNode prev = head;
+        CacheNode temp = head;
+        while (temp != null) {
+            if (temp.word.equals(word)) {
+                break;
             }
+            prev = temp;
+            temp = temp.next;
         }
+        prev.next = temp.next;
+        temp.next = head;
+        head = temp;
+        return temp;
+    }
 
-        public String getWord() {
-            return word;
+    public boolean nodoEncontrado(String word) {
+        CacheNode temp = head;
+        boolean encontrado = false;
+
+        while (temp != null) {
+            if (temp.word.equals(word)) {
+                encontrado = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        return encontrado;
+    }
+
+    public void eliminarUltimoNodo() {
+        CacheNode temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.prev.next = null;
+        count--;
+    }
+
+}
+
+class CacheNode {
+
+    public String word;
+    public CacheNode next;
+    public CacheNode prev;
+
+    public CacheNode(String word) {
+        this.word = word;
+    }
+}
+
+class SlowWord {
+
+    String word;
+
+    public SlowWord(String word) {
+        this.word = word;
+        try {
+            Thread.sleep(50);
+            System.out.println(word);
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public String getWord() {
+        return word;
+    }
+}
+
+public static void main(String[] args) throws Exception {
         new CacheTest().run();
     }
 
@@ -103,7 +126,11 @@ public class CacheTest {
         Set<String> wordList = new HashSet<>();
         int nWords = 0;
         int nLines = 1;
-        BufferedReader br = new BufferedReader(new InputStreamReader(CacheTest.class.getResourceAsStream("/com/fabzdev/quijote.txt")));
+        BufferedReader
+
+br = new BufferedReader(new InputStreamReader(CacheTest.class  
+
+.getResourceAsStream("/com/fabzdev/quijote.txt")));
         String line = br.readLine();
         while (line != null) {
             StringTokenizer st = new StringTokenizer(line, " ");

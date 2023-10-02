@@ -1,4 +1,4 @@
-package com.fabzdev.generics.dataStructures;
+package com.fabzdev.dataStructures;
 
 /**
  *

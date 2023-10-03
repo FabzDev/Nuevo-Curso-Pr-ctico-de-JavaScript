@@ -105,5 +105,8 @@ public class InfijoToPostfijo {
         InfijoToPostfijo conversor = new InfijoToPostfijo();
         String postfijo = conversor.convertir("1 / ( 2 + 3 ) + 5");
         System.out.println(postfijo);
+        
+        Postfijo pf = new Postfijo();
+        System.out.println(pf.calculate(postfijo));
     }
 }

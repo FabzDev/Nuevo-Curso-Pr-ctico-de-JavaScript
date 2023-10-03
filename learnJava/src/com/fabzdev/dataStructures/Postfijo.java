@@ -15,14 +15,14 @@ public class Postfijo {
     public Stack stack = new Stack(100);
     public Double result;
 
-    private boolean isDigit(char ch) {
+    public boolean isDigit(char ch) {
         if (ch >= '0' && ch <= '9') {
             return true;
         }
         return false;
     }
 
-    private boolean isNumber(String str) {
+    public boolean isNumber(String str) {
         int dot = -1;
         int digits = 0;
         for (int i = 0; i < str.length(); i++) {
@@ -50,7 +50,7 @@ public class Postfijo {
     
     
 
-    private void calculate(String statement) {
+    public Double calculate(String statement) {
         StringTokenizer st = new StringTokenizer(statement, " ");
         while (st.hasMoreTokens()) {
             String token = st.nextToken();
@@ -83,15 +83,15 @@ public class Postfijo {
                 throw new IllegalArgumentException();
             }
         }
+        return result;
     }
 
     public static void main(String[] args) {
         Postfijo ps = new Postfijo();
-        ps.calculate("5 6 + 9 + 2 / 5 * -1 * 2 * -1 *");
-//        System.out.println(ps.stack.peak());
-        System.out.println(ps.result);
         
-        System.out.println("- isNumber? " + ps.isNumber("-"));
+        System.out.println(ps.calculate("5 6 + 9 + 2 / 5 * -1 * 2 * -1 *"));
+        
+//        System.out.println("- isNumber? " + ps.isNumber("-"));
     }
 
 }

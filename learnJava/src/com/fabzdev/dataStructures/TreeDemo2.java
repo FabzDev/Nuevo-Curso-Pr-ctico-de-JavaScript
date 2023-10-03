@@ -22,34 +22,49 @@ public class TreeDemo2 {
             this.right = right;
             this.left = left;
         }
+    }
 
-        public TreeNode createNode() {
+    private TreeNode createNode() {
 
-            TreeNode res = new TreeNode("Objeto", new TreeNode("Vivo",
-                    new TreeNode("Vertebrado", new TreeNode("Caballo", null, null), new TreeNode("Perro", null, null)),
-                    new TreeNode("Invertebrado", new TreeNode("Gusano", null, null), new TreeNode("Medusa", null, null))),
-                    new TreeNode("No-Vivo",
-                            new TreeNode("Natural", new TreeNode("Roca", null, null), new TreeNode("Lago", null, null)),
-                            new TreeNode("Artificial", new TreeNode("Casa", null, null), new TreeNode("Bicicleta", null, null))));
-            return res;
+        TreeNode res = new TreeNode("Objeto", new TreeNode("Vivo",
+                new TreeNode("Vertebrado", new TreeNode("Caballo", null, null), new TreeNode("Perro", null, null)),
+                new TreeNode("Invertebrado", new TreeNode("Gusano", null, null), new TreeNode("Medusa", null, null))),
+                new TreeNode("No-Vivo",
+                        new TreeNode("Natural", new TreeNode("Roca", null, null), new TreeNode("Lago", null, null)),
+                        new TreeNode("Artificial", new TreeNode("Casa", null, null), new TreeNode("Bicicleta", null, null))));
+        return res;
+    }
+
+    private void recursivePrint(TreeNode tree, int level) {
+        if (tree == null) {
+            return;
         }
 
-        public void printTree(TreeNode tree) {
-            if (tree == null) {
-                return;
+        for (int i = 0; i < level; i++) {
+            if (i == 0) {
+                System.out.print("|");
+            } else if (i == level - 1) {
+                System.out.print("---- ");
+            } else {
+                System.out.print("----");
+
             }
-            printTree(tree.right);
-//            System.out.println(tree.text);
-            printTree(tree.left);
-            System.out.println(tree.text);
         }
+        System.out.println(tree.text);
+        recursivePrint(tree.right, level + 1);
+        recursivePrint(tree.right, level + 1);
+    }
 
+    private void printTree(TreeNode tree) {
+        recursivePrint(tree, 0);
     }
 
     public static void main(String[] args) {
         TreeDemo2 td2 = new TreeDemo2();
-        TreeNode tn = td2.new TreeNode();
-        TreeNode result = tn.createNode();
-        result.printTree(result);
+        TreeNode root = td2.createNode();
+        td2.printTree(root);
+        for (int i = 0; i < 1; i++) {
+            System.out.println("cero");
+        }
     }
 }

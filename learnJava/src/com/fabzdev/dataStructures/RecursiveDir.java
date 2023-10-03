@@ -22,9 +22,21 @@ public class RecursiveDir {
 
         }
     }
+    
+    public void printPath(File file) {
+        
+        System.out.println(file.getAbsolutePath());
+        if (file.isDirectory()) {
+            for (File f : file.listFiles()) {
+                printPath(f);
+            }
+
+        }
+    }
 
     public static void main(String[] args) {
         RecursiveDir rd = new RecursiveDir();
-        rd.printDir(new File("d:/SENA"), 0);
+//        rd.printDir(new File("d:/SENA"), 0);
+        rd.printPath(new File("d:/SENA"));
     }
 }

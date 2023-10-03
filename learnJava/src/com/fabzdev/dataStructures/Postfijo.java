@@ -47,6 +47,8 @@ public class Postfijo {
         }
         return true;
     }
+    
+    
 
     private void calculate(String statement) {
         StringTokenizer st = new StringTokenizer(statement, " ");

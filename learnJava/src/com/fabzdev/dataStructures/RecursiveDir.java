@@ -8,19 +8,23 @@ import java.io.File;
  */
 public class RecursiveDir {
 
-    public void printDir(File file) {
-        
+    public void printDir(File file, int level) {
+        for (int i = 0; i < level; i++) {
+            System.out.print("    ");
+        }
         System.out.println(file.getName());
         if (file.isDirectory()) {
+            level++;
             File[] files = file.listFiles();
             for (File f : files) {
-                printDir(f);
+                printDir(f, level);
             }
+
         }
     }
 
     public static void main(String[] args) {
         RecursiveDir rd = new RecursiveDir();
-        rd.printDir(new File("d:/SENA"));
+        rd.printDir(new File("d:/SENA"), 0);
     }
 }

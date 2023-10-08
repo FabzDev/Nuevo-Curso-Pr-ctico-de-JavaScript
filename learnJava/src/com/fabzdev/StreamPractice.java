@@ -18,11 +18,15 @@ import java.util.logging.Logger;
 public class StreamPractice {
 
     public void escribir() {
-        try (OutputStream out = new FileOutputStream("practice2.txt");) {
-            byte[] fabio = {0x46, 0x61, 0x62, 0x69, 0x6F};
+        try (OutputStream out = new FileOutputStream("practice.txt");) {
+//            byte[] fabio = {0x46, 0x61, 0x62, 0x69, 0x6F};
+            byte[] fabio = {0b01000110, 97, 98, 0x69, 111};
+
 
             for (int i = 0; i < fabio.length; i++) {
                 out.write(fabio[i]);
+//                out.write(174);
+
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(StreamPractice.class.getName()).log(Level.SEVERE, null, ex);
@@ -32,14 +36,19 @@ public class StreamPractice {
     }
 
     public void leer() {
-        try (InputStream in = new FileInputStream("practice2.txt");) {
-            int bits;
-            do {
-                bits = in.read();
-                if (bits != -1) {
-                    System.out.println(bits);
-                }
-            } while (bits != -1);
+        try (InputStream in = new FileInputStream("practice.txt");) {
+//            int bits;
+              byte[] bytesArr = new byte[2];
+//            do {
+//                bits = in.read();
+//                if (bits != -1) {
+                    System.out.println(in.read(bytesArr));
+                    System.out.println(in.read(bytesArr));
+                    System.out.println(in.read(bytesArr));
+                    System.out.println(in.read(bytesArr));
+//                    System.out.println(String.valueOf(bytesArr[5]));
+//                }
+//            } while (bits != -1);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(StreamPractice.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -82,9 +91,9 @@ public class StreamPractice {
     public static void main(String[] args) {
         StreamPractice sp = new StreamPractice();
 //        sp.escribir();
-//        sp.leer();
+        sp.leer();
 //        sp.escribirObjeto();
-        sp.leerObjeto();
+//        sp.leerObjeto();
 
     }
 }

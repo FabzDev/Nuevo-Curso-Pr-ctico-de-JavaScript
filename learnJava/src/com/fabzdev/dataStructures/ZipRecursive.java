@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -54,24 +56,42 @@ public class ZipRecursive {
     }
 
     //UNZIP
-//    private void unzipFile(File folderToUnzip, ZipInputStream zipFile) throws IOException {
-//        ZipEntry zipEntry = zipFile.getNextEntry();
-//        
-//        byte[] buffer = new byte[4096];
-//        try (OutputStream out = new FileOutputStream(zipEntry)) {
-//            out.write(buffer, 0, 0);
-//        }
-//    }
+    public void unzip(File zipFile, File folder) {
+        try (InputStream zip = new FileInputStream(zipFile); ZipInputStream zipStream = new ZipInputStream(zip)) {
+            ZipEntry entry = zipStream.getNextEntry();
+            while (entry != null) {
+                String fileName = entry.getName();
+                if (entry.isDirectory()) {
+                    File dest = new File(folder, fileName);
+                    if (!dest.mkdirs()) {
+                        throw new IOException("mkdirs: ");
+                    }
 
-    private void Unzip(File fileToUnzip, File folderWhereUnzip) throws IOException {
-        try (ZipInputStream zin = new ZipInputStream(new FileInputStream(fileToUnzip))) {
-            ZipEntry zipEntry = zin.getNextEntry();
-            while (zipEntry != null){
-            FileOutputStream out = new FileOutputStream(folderWhereUnzip);
-            out.write(zipEntry.);
+                } else {
+                    File dest = new File(folder, fileName);
+                    if (!dest.getParentFile().exists()) {
+                        if (!dest.getParentFile().mkdirs()) {
+                            throw new IOException("mkdirs: ");
+                        }
+                    }
+                }
+                try (FileOutputStream out = new FileOutputStream(folder);) {
+                    byte[] bytes = new byte[4096];
+                    int n = zipStream.read(bytes);
+                    while (n != -1) {
+                        out.write(bytes, 0, n);
+                    }
+                    n = zipStream.read(bytes);
+
+                } catch (Exception e) {
+                    System.out.println("Error: " + e);
+                }
             }
-            
+            entry = zipStream.getNextEntry();
+        } catch (IOException ex) {
+            Logger.getLogger(ZipRecursive.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public static void main(String[] args) throws IOException {
@@ -82,9 +102,9 @@ public class ZipRecursive {
 //        zipR.createZip(srcDir, zipFile);
 
         File fileToUnzip = new File("c:/TheJavaPathV2/result.zip");
-        File folderWhereUnzip = new File("c:/TheJavaPathV2/result");
+        File folderWhereUnzip = new File("C:/TheJavaPathV2/");
 
-        zipR.Unzip(fileToUnzip, folderWhereUnzip);
+        zipR.unzip(fileToUnzip, folderWhereUnzip);
     }
 
 }

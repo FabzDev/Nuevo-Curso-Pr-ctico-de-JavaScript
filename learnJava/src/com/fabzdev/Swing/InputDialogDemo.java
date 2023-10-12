@@ -14,9 +14,10 @@ import javax.swing.SwingUtilities;
  * @author fabio
  */
 public class InputDialogDemo {
+
     public static void main(String[] args) {
         InputDialogDemo smd = new InputDialogDemo();
-        
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -25,10 +26,9 @@ public class InputDialogDemo {
 //                frame.setMinimumSize(new Dimension(400, 500));
 //                frame.setVisible(true);
                 String name = JOptionPane.showInputDialog(null, "Cual es tu nombre?");
-                        if(name != null){
-                            JOptionPane.showMessageDialog(null, "|Hola " + name + "|");
-                        }
-                
+                if (name != null) {
+                    JOptionPane.showMessageDialog(null, "|Hola " + name + "|");
+                }
             }
         });
     }

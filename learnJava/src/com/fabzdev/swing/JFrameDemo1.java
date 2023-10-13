@@ -1,5 +1,5 @@
 
-package com.fabzdev.Swing;
+package com.fabzdev.swing;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 

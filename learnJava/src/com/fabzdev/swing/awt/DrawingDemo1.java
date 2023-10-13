@@ -24,9 +24,25 @@ public class DrawingDemo1 extends JPanel {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
-        for (int i = 0; i < 16; i++) {
-            g2d.setColor(new Color(0, (256/16 * i), 0));
-            g2d.fillRect(i*getHeight()/32, i*getWidth()/32, (getWidth() - 1 - i*getWidth()/16), (getHeight() - 1 - i*getHeight()/16));
+//        for (int i = 0; i < 16; i++) {
+//            g2d.setColor(new Color(0, (256/16 * i), 0));
+//            g2d.fillRect(i*getHeight()/32, i*getWidth()/32, (getWidth() - 1 - i*getWidth()/16), (getHeight() - 1 - i*getHeight()/16));
+//        }
+        int x;
+        int y;
+        int width = getWidth();
+        int height = getHeight();
+        int count=0;
+        int step =16;
+        while (width != 0 && height != 0 && count < 16) {
+            x = count*step;
+            y = count*step;
+            
+            g2d.setColor(new Color(0, ((256/16) * count), 0));
+            g2d.fillRect(x, y, width, height);
+            width = width - 2*step;
+            height = height - 2*step;
+            count++;
         }
     }
 
@@ -36,7 +52,7 @@ public class DrawingDemo1 extends JPanel {
             public void run() {
                 JFrame frame = new JFrame();
                 frame.setLocationRelativeTo(null);
-                frame.setMinimumSize(new Dimension(500, 500));
+                frame.setMinimumSize(new Dimension(500, 400));
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setVisible(true);
 

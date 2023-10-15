@@ -31,7 +31,7 @@ public class BallAnimation1 extends JPanel {
         y = 0;
         incX = 2;
         incY = 2;
-        size = 10;
+        size = 15;
 
         timer = new javax.swing.Timer(1000/120, new ActionListener() {
             @Override
@@ -68,7 +68,7 @@ public class BallAnimation1 extends JPanel {
         super.paintComponent(g);
         setBackground(Color.black);
         g.setColor(Color.yellow);
-        g.fillRect(x, y, size, size);
+        g.fillOval(x, y, size, size);
     }
 
     private void stopTimer() {

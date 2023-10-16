@@ -20,7 +20,6 @@ import javax.swing.SwingUtilities;
 public class BallAnimationOOPFigure extends JPanel {
 
     private class Ball {
-
         int x;
         int y;
         int incX;
@@ -64,31 +63,25 @@ public class BallAnimationOOPFigure extends JPanel {
     }
 
     private class SolidRect extends Ball {
-
         public SolidRect(int x, int y, int size, int incX, int incY, Color color) {
             super(x, y, size, incX, incY, color);
         }
-
         @Override
         public void paint(Graphics2D g2d) {
             g2d.setColor(super.color);
             g2d.fillRect(super.x, super.y, super.size, super.size);
         }
-
     }
 
     private class FrameRect extends Ball {
-
         public FrameRect(int x, int y, int size, int incX, int incY, Color color) {
             super(x, y, size, incX, incY, color);
         }
-
         @Override
         public void paint(Graphics2D g2d) {
             g2d.setColor(super.color);
             g2d.drawRect(super.x, super.y, super.size, super.size);
         }
-
     }
 
     private class Triangle extends Ball {
@@ -98,7 +91,7 @@ public class BallAnimationOOPFigure extends JPanel {
         public Triangle(int x, int y, int size, int incX, int incY, Color color) {
             super(x, y, size, incX, incY, color);
         }
-
+        
         @Override
         public void animate() {
             super.animate();
@@ -110,12 +103,9 @@ public class BallAnimationOOPFigure extends JPanel {
             yPoints[1] = y + size;
             yPoints[2] = y + size;
         }
-
+        
         @Override
         public void paint(Graphics2D g2d) {
-
-            
-
             g2d.setColor(super.color);
             g2d.drawPolygon(xPoints, yPoints, 3);
         }

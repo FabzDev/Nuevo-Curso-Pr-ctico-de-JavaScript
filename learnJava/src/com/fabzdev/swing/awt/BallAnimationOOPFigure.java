@@ -17,16 +17,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class BallAnimationOOP2 extends JPanel {
+public class BallAnimationOOPFigure extends JPanel {
 
     private class Ball {
 
-        private int x;
-        private int y;
-        private int incX;
-        private int incY;
-        private int size;
-        private Color color;
+        int x;
+        int y;
+        int incX;
+        int incY;
+        int size;
+        Color color;
 
         public Ball(int x, int y, int size, int incX, int incY, Color color) {
             this.x = x;
@@ -37,7 +37,7 @@ public class BallAnimationOOP2 extends JPanel {
             this.color = color;
         }
 
-        private void animate() {
+        public void animate() {
             Rectangle border = new Rectangle(new Dimension(getWidth(), getHeight()));
             x += incX;
             if (x + size >= border.width) {
@@ -57,20 +57,78 @@ public class BallAnimationOOP2 extends JPanel {
             }
         }
 
-        private void paint(Graphics2D g2d) {
+        public void paint(Graphics2D g2d) {
             g2d.setColor(color);
             g2d.fillOval(x, y, size, size);
         }
     }
 
+    private class SolidRect extends Ball {
+
+        public SolidRect(int x, int y, int size, int incX, int incY, Color color) {
+            super(x, y, size, incX, incY, color);
+        }
+
+        @Override
+        public void paint(Graphics2D g2d) {
+            g2d.setColor(super.color);
+            g2d.fillRect(super.x, super.y, super.size, super.size);
+        }
+
+    }
+
+    private class FrameRect extends Ball {
+
+        public FrameRect(int x, int y, int size, int incX, int incY, Color color) {
+            super(x, y, size, incX, incY, color);
+        }
+
+        @Override
+        public void paint(Graphics2D g2d) {
+            g2d.setColor(super.color);
+            g2d.drawRect(super.x, super.y, super.size, super.size);
+        }
+
+    }
+
+    private class Triangle extends Ball {
+        int[] xPoints = new int[3];
+        int[] yPoints = new int[3];
+
+        public Triangle(int x, int y, int size, int incX, int incY, Color color) {
+            super(x, y, size, incX, incY, color);
+        }
+
+        @Override
+        public void animate() {
+            super.animate();
+            xPoints[0] = x + size / 2;
+            xPoints[1] = x + size;
+            xPoints[2] = x;
+
+            yPoints[0] = y;
+            yPoints[1] = y + size;
+            yPoints[2] = y + size;
+        }
+
+        @Override
+        public void paint(Graphics2D g2d) {
+
+            
+
+            g2d.setColor(super.color);
+            g2d.drawPolygon(xPoints, yPoints, 3);
+        }
+    }
+
     //BallAnimation continue:
     private javax.swing.Timer timer;
-    private Ball[] balls = new Ball[100];
+    private Ball[] balls = new Ball[1024];
 
-    public BallAnimationOOP2() {
+    public BallAnimationOOPFigure() {
         super();
         setBackground(Color.black);
-        createBalls();
+        createFigures();
         timer = new javax.swing.Timer(1000 / 120, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,7 +136,6 @@ public class BallAnimationOOP2 extends JPanel {
                     ball.animate();
                 }
                 repaint();
-
             }
         });
         timer.start();
@@ -101,10 +158,32 @@ public class BallAnimationOOP2 extends JPanel {
         return (int) (max * Math.random());
     }
 
-    private void createBalls() {
+    private void createFigures() {
+
         for (int n = 0; n < balls.length; n++) {
-            balls[n] = new Ball(random(500), random(400), 10 + random(20), 1 + random(10),
-                    1 + random(10), new Color((50 + random(205)), (50 + random(205)), (50 + random(205))));
+            int size = 10 + random(20);
+            int x = random(500) - size;
+            int y = random(400) - size;
+            int incX = 1 + random(10);
+            int incY = 1 + random(10);
+            Color color = new Color((50 + random(205)), (50 + random(205)), (50 + random(205)));
+            int figure = random(4);
+
+            switch (figure) {
+                case 0:
+                    balls[n] = new Ball(x, y, size, incX, incY, color);
+                    break;
+                case 1:
+                    balls[n] = new SolidRect(x, y, size, incX, incY, color);
+                    break;
+                case 2:
+                    balls[n] = new FrameRect(x, y, size, incX, incY, color);
+                    break;
+                case 3:
+                    balls[n] = new Triangle(x, y, size, incX, incY, color);
+                    break;
+            }
+
         }
     }
 
@@ -114,7 +193,7 @@ public class BallAnimationOOP2 extends JPanel {
             public void run() {
                 JFrame frame = new JFrame();
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                BallAnimationOOP2 panel = new BallAnimationOOP2();
+                BallAnimationOOPFigure panel = new BallAnimationOOPFigure();
                 frame.setContentPane(panel);
                 frame.addWindowListener(new WindowAdapter() {
                     @Override

@@ -78,7 +78,6 @@ public class BallAnimationOOP extends JPanel {
                     ball.animate();
                 }
                 repaint();
-
             }
         });
         timer.start();

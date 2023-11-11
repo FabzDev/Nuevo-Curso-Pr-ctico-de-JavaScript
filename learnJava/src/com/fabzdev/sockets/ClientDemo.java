@@ -15,7 +15,7 @@ import java.net.Socket;
  */
 public class ClientDemo {
     public static void main(String[] args) throws Exception{
-        Socket client = new Socket("127.0.0.1", 8080);
+        Socket client = new Socket("192.168.1.6", 8080);
         
         InputStream in = client.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));

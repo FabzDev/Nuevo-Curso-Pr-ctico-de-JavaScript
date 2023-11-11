@@ -16,7 +16,7 @@ import java.net.Socket;
 public class ServerDemo {
 
     private ServerSocket server;
-    int nCount = 1;
+    int nCount = 0;
 
     public ServerDemo() {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -25,12 +25,17 @@ public class ServerDemo {
         }));}
 
     public void dispatchClient(Socket client) {
-        try {
+        Thread t = new Thread(()->{
+            try {
             PrintWriter pr = new PrintWriter(client.getOutputStream());
             pr.printf("Hola Mundo\nEres el cliente #%d\n", ++nCount);
+            pr.close();
+            System.out.println("Conexión atentida");
         } catch (IOException ex) {
             System.out.println("Error al enviar informacion al cliente: " + ex.getMessage());
         }
+        });
+        t.start();
     }
 
     public void run() {

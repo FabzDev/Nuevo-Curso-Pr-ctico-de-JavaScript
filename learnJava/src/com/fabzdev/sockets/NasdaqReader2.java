@@ -37,7 +37,7 @@ public class NasdaqReader2 {
         }
     }
 
-    private static InputStream getInputStream() throws IOException, URISyntaxException {
+    public static InputStream getInputStream() throws IOException, URISyntaxException {
         File f = new File(NASDAQLISTFILE);
         if (!f.exists()) {
             createNasdaqFile(f);

@@ -3168,7 +3168,6 @@ NIR|Near Intelligence, Inc. - Common Stock|G|N|D|100|N|N
 NIRWW|Near Intelligence, Inc. - Warrant|S|N|N|100|N|N
 NISN|NiSun Intl Enterprise Development Group Co, Ltd - Class A Common Shares|S|N|N|100|N|N
 NIU|Niu Technologies - American Depositary Shares|G|N|N|100|N|N
-NKGN||G|N|N|100|N|N
 NKGNW|NKGen Biotech, Inc. - Warrants|S|N|N|100|N|N
 NKLA|Nikola Corporation - Common Stock|Q|N|N|100|N|N
 NKSH|National Bankshares, Inc. - Common Stock|S|N|N|100|N|N

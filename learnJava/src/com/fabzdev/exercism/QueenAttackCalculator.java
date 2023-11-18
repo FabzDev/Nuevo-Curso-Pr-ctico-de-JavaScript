@@ -16,30 +16,15 @@ public class QueenAttackCalculator {
     private int table[][];
     private boolean canAttack;
 
-    private static class Queen {
-        private int posX;
-        private int posY;
-
-        public Queen(int posX, int posY) {
-            this.posX = posX;
-            this.posY = posY;
+    QueenAttackCalculator(Queen queen1, Queen queen2) throws IllegalArgumentException {
+        if (queen1 == null || queen2 == null) {
+            throw new IllegalArgumentException("You must supply valid positions for both Queens.");
         }
-
-        public int getPosX() {
-            return posX;
+        if (queen1.getPosX() == queen2.getPosX() && queen1.getPosY() == queen2.getPosY()) {
+            throw new IllegalArgumentException("Queens cannot occupy the same position.");
         }
-
-        public int getPosY() {
-            return posY;
-        }
-    }
-
-    public QueenAttackCalculator(Queen q1, Queen q2) throws Exception {
-        if(q1 == null || q2 == null)
-            throw new Exception();
-        
-        int q1x = q1.getPosX();
-        int q1y = q1.getPosY();
+        int q1x = queen1.getPosX();
+        int q1y = queen1.getPosY();
         table = new int[8][8];
 
         while (q1x > 0 && q1y > 0) {
@@ -52,8 +37,8 @@ public class QueenAttackCalculator {
             q1y += 1;
         }
 
-        q1x = q1.getPosX();
-        q1y = q1.getPosY();
+        q1x = queen1.getPosX();
+        q1y = queen1.getPosY();
         while (q1x > 0 && q1y < 7) {
             q1x -= 1;
             q1y += 1;
@@ -64,26 +49,27 @@ public class QueenAttackCalculator {
             q1y -= 1;
         }
 
-        if (q1.getPosX() == q2.getPosX()) {
+        if (queen1.getPosX() == queen2.getPosX()) {
             canAttack = true;
-        } else if (q1.getPosY() == q2.getPosY()) {
+        } else if (queen1.getPosY() == queen2.getPosY()) {
             canAttack = true;
-        } else if (table[q2.getPosX()][q2.getPosY()] == 1) {
+        } else if (table[queen2.getPosX()][queen2.getPosY()] == 1) {
             canAttack = true;
         }
     }
 
-    public boolean canQueensAttackOneAnother() {
+    boolean canQueensAttackOneAnother() {
         return canAttack;
     }
 
     public static void main(String[] args) {
-        QueenAttackCalculator eq;
         try {
-            eq = new QueenAttackCalculator(null, new Queen(5,6));
+            QueenAttackCalculator eq = new QueenAttackCalculator(new Queen(5, 3), new Queen(5, 6));
             System.out.println(eq.canQueensAttackOneAnother());
-        } catch (Exception ex) {
-            System.out.println("Null argument provided. " + ex.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
+
     }
+
 }

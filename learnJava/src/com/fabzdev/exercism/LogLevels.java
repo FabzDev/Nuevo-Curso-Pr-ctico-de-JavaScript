@@ -11,29 +11,23 @@ package com.fabzdev.exercism;
 public class LogLevels {
 
     public static String message(String logLine) {
-        String s1 = logLine.split(":")[1].trim();
-        if (s1.contains("\\")) {
-            s1.replace("\\", "&");
-            String s2 = s1.split("&")[0];
-            return s2;
-        }
-        return s1;
+        String message = logLine.split(":")[1].trim();
+        return message;
     }
 
     public static String logLevel(String logLine) {
-        return logLine.substring(1).split("]")[0].toLowerCase();
+        return logLine.substring(1,logLine.indexOf(']')).toLowerCase();
     }
     
     public static String reformat(String logLine) {
-        String s1 = LogLevels.message(logLine);
-        String s2 = LogLevels.logLevel(logLine);
-        return s1 + " (" + s2 + ")";
+        String format1 = LogLevels.message(logLine);
+        String format2 = LogLevels.logLevel(logLine);
+        return format1 + " (" + format2 + ")";
     }
 
     public static void main(String[] args) {
-        System.out.println(LogLevels.message("[WARNING]:  Disk almost full\r\n"));
-        System.out.println(LogLevels.logLevel("[ERROR]: Invalid operation"));
-        System.out.println(LogLevels.reformat("[INFO]: Operation completed"));
-
+        System.out.println(message("[WARNING]:  Disk almost full\r\n"));
+        System.out.println(logLevel("[ERROR]: Invalid operation"));
+        System.out.println(reformat("[INFO]: Operation completed"));
     }
 }

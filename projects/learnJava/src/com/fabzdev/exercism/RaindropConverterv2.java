@@ -10,17 +10,30 @@ package com.fabzdev.exercism;
  */
 public class RaindropConverterv2 {
 
-    String convert(int number) {
-        StringBuilder temp = new StringBuilder();
+//    String convert(int number) {
+//        StringBuilder temp = new StringBuilder();
+//        if(number%3 == 0)
+//            temp.append("Pling");
+//        if(number%5 == 0)
+//            temp.append("Plang");
+//        if(number%7 == 0)
+//            temp.append("Plong");
+//        if(number%3 != 0 && number%5 != 0 && number%7 != 0)
+//            temp.append(String.valueOf(number));
+//        return temp.toString();
+//    }
+    
+      String convert(int number) {
+        String temp = "";
         if(number%3 == 0)
-            temp.append("Pling");
+            temp = temp.concat("Pling");
         if(number%5 == 0)
-            temp.append("Plang");
+            temp = temp.concat("Plang");
         if(number%7 == 0)
-            temp.append("Plong");
+            temp = temp.concat("Plong");
         if(number%3 != 0 && number%5 != 0 && number%7 != 0)
-            temp.append(String.valueOf(number));
-        return temp.toString();
+            temp = temp.concat(String.valueOf(number));
+        return temp;
     }
     
     public static void main(String[] args) {

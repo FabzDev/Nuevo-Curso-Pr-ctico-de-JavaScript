@@ -43,10 +43,5 @@ public class LanguageList {
 
     public boolean isExciting() {
         return (languages.contains("Java") || languages.contains("Kotlin"))?true:false;
-//        if(languages.contains("Java") || languages.contains("Kotlin")){
-//            return true;
-//        } else {
-//            return false;
-//        }
     }
 }

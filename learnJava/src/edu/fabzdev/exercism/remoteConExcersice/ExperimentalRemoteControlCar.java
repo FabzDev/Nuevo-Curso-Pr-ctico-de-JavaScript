@@ -1,4 +1,4 @@
-package edu.fabzdev.exercism.remoteControlWithInterface;
+package edu.fabzdev.exercism.remoteConExcersice;
 
 public class ExperimentalRemoteControlCar implements RemoteControlCar {
     private int distance = 0;

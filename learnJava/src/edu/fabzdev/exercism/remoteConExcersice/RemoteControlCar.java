@@ -1,4 +1,4 @@
-package edu.fabzdev.exercism.remoteControlWithInterface;
+package edu.fabzdev.exercism.remoteConExcersice;
 
 public interface RemoteControlCar {
     void drive();

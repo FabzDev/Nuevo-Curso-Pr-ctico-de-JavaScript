@@ -1,4 +1,4 @@
-package edu.fabzdev.exercism.remoteConExcersice;
+package edu.fabzdev.exercism.remoteConExcercise;
 
 public class ProductionRemoteControlCar implements RemoteControlCar, Comparable<ProductionRemoteControlCar> {
     private int victories;
